@@ -11,7 +11,8 @@
  * Created on 2 kwietnia 2017, 20:46
  */
 
-#include "OGRLASLayer.h"
+#include "ogr_las.h"
+#include <liblas/liblas.hpp>
 
 OGRLASLayer::OGRLASLayer( const char *pszFilename )
 {

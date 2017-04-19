@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include <ogrsf_frmts.h>
+#include "ogr_las.h"
 #include <cpl_conv.h>
 
 CPL_CVSID("$Id$");

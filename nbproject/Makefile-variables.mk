@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=libgdalLas.so
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libgdalLas.so
+CND_ARTIFACT_NAME_Debug=libOGRLAS.so
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libOGRLAS.so
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=libgdalLas.so.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/libgdalLas.so.tar
+CND_PACKAGE_NAME_Debug=libOGRLAS.so.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/libOGRLAS.so.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=libgdalLas.so
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libgdalLas.so
+CND_ARTIFACT_NAME_Release=libOGRLAS.so
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libOGRLAS.so
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=libgdalLas.so.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/libgdalLas.so.tar
+CND_PACKAGE_NAME_Release=libOGRLAS.so.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/libOGRLAS.so.tar
 #
 # include compiler specific variables
 #

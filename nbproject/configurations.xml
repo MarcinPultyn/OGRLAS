@@ -4,8 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>OGRLASDataSource.h</itemPath>
-      <itemPath>OGRLASLayer.h</itemPath>
+      <itemPath>ogr_las.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -42,13 +41,11 @@
       </compileType>
       <item path="OGRLASDataSource.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="OGRLASDataSource.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="OGRLASDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="OGRLASLayer.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="OGRLASLayer.h" ex="false" tool="3" flavor2="0">
+      <item path="ogr_las.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="2">
@@ -73,13 +70,11 @@
       </compileType>
       <item path="OGRLASDataSource.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="OGRLASDataSource.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="OGRLASDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="OGRLASLayer.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="OGRLASLayer.h" ex="false" tool="3" flavor2="0">
+      <item path="ogr_las.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

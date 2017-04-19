@@ -5,20 +5,33 @@
  */
 
 /* 
- * File:   OGRSPFDataSource.h
- * Author: sollux
+ * File:   ogr_las.h
+ * Author: emkej
  *
- * Created on 22 marca 2017, 00:25
+ * Created on April 19, 2017, 9:14 PM
  */
 
-#ifndef OGRLASDATASOURCE_H
-#define OGRLASDATASOURCE_H
-#include "OGRLASLayer.h"
-#include <cpl_conv.h>
-#include <cpl_error.h>
-#include <cpl_conv.h>
-#include <stddef.h>
+#ifndef OGR_LAS_H
+#define OGR_LAS_H
 
+#include "ogrsf_frmts.h"
+#include <fstream>
+
+class OGRLASLayer : public OGRLayer
+{
+    OGRFeatureDefn     *poFeatureDefn;
+    std::ifstream       ifs;
+    FILE               *fp;
+    int                 nNextFID;
+  public:
+    OGRLASLayer( const char *pszFilename );
+   ~OGRLASLayer();
+    void                ResetReading();
+    OGRFeature *        GetNextFeature();
+    OGRFeatureDefn *    GetLayerDefn() { return poFeatureDefn; }
+    int                 TestCapability( const char * ) { return FALSE; }
+
+};
 
 class OGRLASDataSource : GDALDataset
 {
@@ -33,5 +46,5 @@ class OGRLASDataSource : GDALDataset
     int                 TestCapability( const char * ) { return FALSE; }
 };
 
-#endif /* OGRLASDATASOURCE_H */
+#endif /* OGR_LAS_H */
 
