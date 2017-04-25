@@ -11,9 +11,7 @@
  * Created on 22 marca 2017, 00:25
  */
 
-
-#include "OGRLASDataSource.h"
-
+#include "ogr_las.h"
 
 OGRLASDataSource::OGRLASDataSource()
 {
@@ -48,7 +46,6 @@ OGRLayer *OGRLASDataSource::GetLayer( int iLayer )
     if( iLayer < 0 || iLayer >= nLayers )
         return NULL;
     return papoLayers[iLayer];
-    //return NULL;
 }
 
 
