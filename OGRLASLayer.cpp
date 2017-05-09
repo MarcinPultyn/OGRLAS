@@ -13,6 +13,7 @@
 
 #include "ogr_las.h"
 #include <liblas/liblas.hpp>
+#include <ogr_core.h>
 
 OGRLASLayer::OGRLASLayer( const char *pszFilename )
 {
@@ -20,7 +21,7 @@ OGRLASLayer::OGRLASLayer( const char *pszFilename )
     poFeatureDefn = new OGRFeatureDefn(CPLGetBasename(pszFilename));
     SetDescription(poFeatureDefn->GetName());
     poFeatureDefn->Reference();
-    poFeatureDefn->SetGeomType(wkbPoint);
+    poFeatureDefn->SetGeomType(wkbPoint25D);
     
     OGRFieldDefn oFieldTemplate("return_num", OFTInteger);
     poFeatureDefn->AddFieldDefn(&oFieldTemplate);
@@ -61,56 +62,27 @@ OGRFeature *OGRLASLayer::GetNextFeature()
     liblas::Point const& p = reader.GetPoint(); 
     std::ostringstream os;
     os << p.GetClassification();
+    
+    OGR_F_SetFieldInteger(poFeature, 0, p.GetReturnNumber());
+    OGR_F_SetFieldInteger(poFeature, 1, p.GetScanAngleRank());
+    OGR_F_SetFieldInteger(poFeature, 2, p.GetIntensity());
+    
     OGR_F_SetFieldString(poFeature, 3, os.str().c_str());
 
     OGR_F_SetFieldInteger(poFeature, 4, p.GetNumberOfReturns());
     OGR_F_SetFieldDouble(poFeature, 5, p.GetTime());
 
-    //OGRGeometry geom(OGR_G_CreateGeometry(wkbPoint25D), OGR_G_DestroyGeometry);
-    //OGR_G_SetPoint(geom, 0, p.GetX(), p.GetY(), p.GetZ());
-    //if (OGRERR_NONE != OGR_F_SetGeometry(poFeature, geom))
-    //{
-    //    throw std::runtime_error("geometry creation failed");
-    //}
-
-    return poFeature;    
-
-            
-
-    
-    // Loop till we find a feature matching our requirements.
-    /*while( true )
+    poFeature->SetFID(nNextFID++);
+    OGRGeometryH geom = OGR_G_CreateGeometry(wkbPoint25D);
+    OGR_G_SetPoint(geom, 0, p.GetX(), p.GetY(), p.GetZ());
+    if (OGRERR_NONE != OGR_F_SetGeometry(poFeature, geom))
     {
-        const char *pszLine = CPLReadLineL(fp);
-        // Are we at end of file (out of features)?
-        if( pszLine == NULL )
-            return NULL;
-        const double dfX = atof(pszLine);
-        pszLine = strstr(pszLine,"|");
-        if( pszLine == NULL )
-            continue; // we should issue an error!
-        else
-            pszLine++;
-        const double dfY = atof(pszLine);
-        pszLine = strstr(pszLine,"|");
-        const char *pszName = NULL;
-        if( pszLine == NULL )
-            continue; // we should issue an error!
-        else
-            pszName = pszLine + 1;
-        OGRFeature *poFeature = new OGRFeature(poFeatureDefn);
-        poFeature->SetGeometryDirectly(new OGRPoint(dfX, dfY));
-        poFeature->SetField(0, pszName);
-        poFeature->SetFID(nNextFID++);
+        OGR_G_DestroyGeometry(geom);//może nie być potrzebne lub coś psuć
+        throw std::runtime_error("geometry creation failed");
+    }
 
-        if( (m_poFilterGeom == NULL ||
-             FilterGeometry(poFeature->GetGeometryRef())) &&
-            (m_poAttrQuery == NULL ||
-             m_poAttrQuery->Evaluate(poFeature)) )
-         
-            return poFeature;
-        delete poFeature;
-    } */
+    OGR_G_DestroyGeometry(geom);//może nie być potrzebne lub coś psuć
+    return poFeature;   
 }
 
 
