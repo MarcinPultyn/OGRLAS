@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   ogr_las.h
  * Author: emkej
@@ -21,7 +15,7 @@
 class OGRLASLayer : public OGRLayer
 {
     OGRFeatureDefn     *poFeatureDefn;
-    std::ifstream       ifs;
+    liblas::Reader     *reader;
     FILE               *fp;
     int                 nNextFID;
   public:
