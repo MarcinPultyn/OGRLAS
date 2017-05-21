@@ -12,7 +12,6 @@
  */
 
 #include "ogr_las.h"
-#include <liblas/liblas.hpp>
 #include <ogr_core.h>
 
 OGRLASLayer::OGRLASLayer( const char *pszFilename )
@@ -50,7 +49,9 @@ OGRLASLayer::~OGRLASLayer()
         VSIFCloseL(fp);
 }
 
-
+void ResetReading(){
+    
+}
 
 OGRFeature *OGRLASLayer::GetNextFeature()
 {
@@ -59,7 +60,11 @@ OGRFeature *OGRLASLayer::GetNextFeature()
     liblas::ReaderFactory f;
     liblas::Reader reader = f.CreateWithStream(ifs);
     
-    liblas::Point const& p = reader.GetPoint(); 
+    if(!reader.ReadNextPoint())
+        return NULL;
+    
+    liblas::Point const& p = reader.GetPoint();
+    
     std::ostringstream os;
     os << p.GetClassification();
     

@@ -15,6 +15,7 @@
 #define OGR_LAS_H
 
 #include "ogrsf_frmts.h"
+#include <liblas/liblas.hpp>
 #include <fstream>
 
 class OGRLASLayer : public OGRLayer
@@ -33,7 +34,7 @@ class OGRLASLayer : public OGRLayer
 
 };
 
-class OGRLASDataSource : GDALDataset
+class OGRLASDataSource : public GDALDataset
 {
     OGRLASLayer       **papoLayers;
     int                 nLayers;
