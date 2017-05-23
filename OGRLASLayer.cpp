@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   OGRSPFLayer.cpp
  * Author: sollux
@@ -12,7 +6,6 @@
  */
 
 #include "ogr_las.h"
-#include <liblas/liblas.hpp>
 #include <ogr_core.h>
 
 OGRLASLayer::OGRLASLayer( const char *pszFilename )
@@ -36,7 +29,9 @@ OGRLASLayer::OGRLASLayer( const char *pszFilename )
     poFeatureDefn->AddFieldDefn(&oFieldTemplate4);
     poFeatureDefn->AddFieldDefn(&oFieldTemplate5);
 
+    std::ifstream ifs;
     ifs.open(pszFilename, std::ios::in | std::ios::binary);
+    reader = new liblas::Reader(ifs);
     
     fp = VSIFOpenL(pszFilename, "r");
     if( fp == NULL )
@@ -50,16 +45,19 @@ OGRLASLayer::~OGRLASLayer()
         VSIFCloseL(fp);
 }
 
-
+void OGRLASLayer::ResetReading(){
+    reader->Reset();
+}
 
 OGRFeature *OGRLASLayer::GetNextFeature()
 {
     OGRFeature *poFeature = new OGRFeature(poFeatureDefn);
     
-    liblas::ReaderFactory f;
-    liblas::Reader reader = f.CreateWithStream(ifs);
+    if(!reader->ReadNextPoint())
+        return NULL;
     
-    liblas::Point const& p = reader.GetPoint(); 
+    liblas::Point const& p = reader->GetPoint();
+    
     std::ostringstream os;
     os << p.GetClassification();
     

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   ogr_las.h
  * Author: emkej
@@ -15,12 +9,13 @@
 #define OGR_LAS_H
 
 #include "ogrsf_frmts.h"
+#include <liblas/liblas.hpp>
 #include <fstream>
 
 class OGRLASLayer : public OGRLayer
 {
     OGRFeatureDefn     *poFeatureDefn;
-    std::ifstream       ifs;
+    liblas::Reader     *reader;
     FILE               *fp;
     int                 nNextFID;
   public:
@@ -33,7 +28,7 @@ class OGRLASLayer : public OGRLayer
 
 };
 
-class OGRLASDataSource : GDALDataset
+class OGRLASDataSource : public GDALDataset
 {
     OGRLASLayer       **papoLayers;
     int                 nLayers;
