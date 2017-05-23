@@ -4,7 +4,7 @@
 CPL_CVSID("$Id$");
 
 CPL_C_START
-void RegisterOGRSVG();
+void RegisterOGRLAS();
 CPL_C_END
 
 static int OGRLASDriverIdentify( GDALOpenInfo* gdalOpenInfo )
