@@ -38,6 +38,14 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ogr_LAS.${CND_DLIB_EXT}</output>
+          <linkerLibItems>
+            <linkerLibLibItem>gdal</linkerLibLibItem>
+            <linkerLibLibItem>geotiff</linkerLibLibItem>
+            <linkerLibLibItem>las</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="OGRLASDataSource.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -9,8 +9,8 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=libOGRLAS.so
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libOGRLAS.so
+CND_ARTIFACT_NAME_Debug=ogr_LAS.so
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/ogr_LAS.so
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
 CND_PACKAGE_NAME_Debug=libOGRLAS.so.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/libOGRLAS.so.tar
