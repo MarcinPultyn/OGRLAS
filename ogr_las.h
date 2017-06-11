@@ -15,6 +15,7 @@
 class OGRLASLayer : public OGRLayer
 {
     OGRFeatureDefn     *poFeatureDefn;
+    std::ifstream      *ifs;
     liblas::Reader     *reader;
     FILE               *fp;
     int                 nNextFID;

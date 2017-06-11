@@ -29,9 +29,10 @@ OGRLASLayer::OGRLASLayer( const char *pszFilename )
     poFeatureDefn->AddFieldDefn(&oFieldTemplate4);
     poFeatureDefn->AddFieldDefn(&oFieldTemplate5);
 
-    std::ifstream ifs;
-    ifs.open(pszFilename, std::ios::in | std::ios::binary);
-    reader = new liblas::Reader(ifs);
+    ifs = new std::ifstream();
+    ifs->open(pszFilename, std::ios::in | std::ios::binary);
+    
+    reader = new liblas::Reader(*ifs);
     
     fp = VSIFOpenL(pszFilename, "r");
     if( fp == NULL )
@@ -61,6 +62,13 @@ OGRFeature *OGRLASLayer::GetNextFeature()
     std::ostringstream os;
     os << p.GetClassification();
     
+    int retNumber = p.GetReturnNumber();
+    int scanAngleRank = p.GetScanAngleRank();
+    int intensity = p.GetIntensity();
+    int numOfRet =p.GetNumberOfReturns();
+    
+    double time = p.GetTime();
+    
     OGR_F_SetFieldInteger(poFeature, 0, p.GetReturnNumber());
     OGR_F_SetFieldInteger(poFeature, 1, p.GetScanAngleRank());
     OGR_F_SetFieldInteger(poFeature, 2, p.GetIntensity());
@@ -75,15 +83,10 @@ OGRFeature *OGRLASLayer::GetNextFeature()
     OGR_G_SetPoint(geom, 0, p.GetX(), p.GetY(), p.GetZ());
     if (OGRERR_NONE != OGR_F_SetGeometry(poFeature, geom))
     {
-        OGR_G_DestroyGeometry(geom);//może nie być potrzebne lub coś psuć
+        OGR_G_DestroyGeometry(geom);
         throw std::runtime_error("geometry creation failed");
     }
 
-    OGR_G_DestroyGeometry(geom);//może nie być potrzebne lub coś psuć
+    OGR_G_DestroyGeometry(geom);
     return poFeature;   
 }
-
-
-
-
-
